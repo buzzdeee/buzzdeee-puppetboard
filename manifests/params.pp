@@ -3,7 +3,7 @@ class puppetboard::params {
   $config_file  = 'puppetboard/default_settings.py'
   $puppetdb_host = 'localhost'
   $puppetdb_port = '8080'
-  $puppetdb_ssl_verify = 'True'
+  $puppetdb_ssl_verify = 'False'
   $puppetdb_key  = 'None'
   $puppetdb_cert = 'None'
   $puppetdb_timeout = '20'
@@ -18,4 +18,5 @@ class puppetboard::params {
   $service_name = 'puppetboard'
   $package_name = 'puppetboard'
   $package_ensure = 'installed'
+  $use_puppet_certs = true
 }

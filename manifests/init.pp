@@ -54,6 +54,7 @@ class puppetboard (
   $service_flags = $::puppetboard::params::service_flags,
   $service_name = $::puppetboard::params::package_name,
   $package_name = $::puppetboard::params::package_name,
+  $use_puppet_certs = $::puppetboard::params::use_puppet_certs,
 ) inherits puppetboard::params {
 
 
@@ -76,6 +77,7 @@ class puppetboard (
     unresponsive_hours   => $unresponsive_hours,
     enable_query         => $enable_query,
     puppetboard_loglevel => $puppetboard_loglevel,
+    use_puppet_certs     => $use_puppet_certs,
   }
 
   class { 'puppetboard::service':
