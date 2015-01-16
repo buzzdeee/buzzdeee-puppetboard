@@ -88,6 +88,6 @@ class puppetboard (
   }
 
   Class['puppetboard::install'] ->
-  Class['puppetboard::config'] ->
+  Class['puppetboard::config'] ~>
   Class['puppetboard::service']
 }
