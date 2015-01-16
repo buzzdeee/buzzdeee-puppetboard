@@ -1,14 +1,26 @@
 {
   "name": "buzzdeee-puppetboard",
   "version": "0.1.0",
-  "author": "buzzdeee",
+  "author": "Sebastian Reitenbach",
   "summary": "A puppet module to manage puppetboard",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "https://github.com/buzzdeee/buzzdeee-puppetboard.git",
   "project_page": "https://github.com/buzzdeee/buzzdeee-puppetboard",
   "issues_url": "https://github.com/buzzdeee/buzzdeee-puppetboard/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "OpenBSD",
+      "operatingsystemrelease": [
+        "5.6"
+      ]
+    }
+  ],
+  "tags": [
+    "OpenBSD",
+    "puppetboard",
+    "puppet"
+  ],
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
 }
 

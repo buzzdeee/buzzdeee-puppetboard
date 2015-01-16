@@ -1,3 +1,6 @@
+# Private class, do not use directly.
+# The parameters that drive the module.
+
 class puppetboard::params {
   $install_path = '/var/www/puppetboard/'
   $config_file  = 'puppetboard/default_settings.py'

@@ -1,3 +1,7 @@
+# Private class, do not use directly.
+# Takes care about the configuration file,
+# and that configured SSL keys are in place.
+
 class puppetboard::config (
   $install_path,
   $config_file,
@@ -15,27 +19,27 @@ class puppetboard::config (
   $use_puppet_certs,
 ) {
   file { "${install_path}${config_file}":
-    ensure => 'present',
-    owner  => 'root',
-    group  => '0',
-    mode   => '0644',
+    ensure  => 'present',
+    owner   => 'root',
+    group   => '0',
+    mode    => '0644',
     content => template('puppetboard/default_settings.py.erb'),
   }
 
   if $use_puppet_certs {
-    file { "/etc/puppetboard":
+    file { '/etc/puppetboard':
       ensure => 'directory',
       owner  => 'root',
       group  => '0',
       mode   => '0755',
     }
-    exec { "copy puppetboard_key":
-      command => "/bin/cp /etc/puppet/ssl/private_keys/${fqdn}.pem $puppetdb_key && chmod 0644 $puppetdb_key",
+    exec { 'copy puppetboard_key':
+      command => "/bin/cp /etc/puppet/ssl/private_keys/${::fqdn}.pem ${puppetdb_key} && chmod 0644 ${puppetdb_key}",
       creates => $puppetdb_key,
       require => File['/etc/puppetboard'],
     }
-    exec { "copy puppetboard_cert":
-      command => "/bin/cp /etc/puppet/ssl/certs/${fqdn}.pem $puppetdb_cert",
+    exec { 'copy puppetboard_cert':
+      command => "/bin/cp /etc/puppet/ssl/certs/${::fqdn}.pem ${puppetdb_cert}",
       creates => $puppetdb_cert,
       require => File['/etc/puppetboard'],
     }

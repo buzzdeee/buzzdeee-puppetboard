@@ -1,3 +1,6 @@
+# Private class, do not use directly.
+# Takes care about managing the service.
+
 class puppetboard::service (
   $service_name,
   $service_ensure,

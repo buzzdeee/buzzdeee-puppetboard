@@ -29,11 +29,11 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 Sebastian Reitenbach, unless otherwise noted.
 #
 class puppetboard (
   $install_path = $::puppetboard::params::install_path,
@@ -53,6 +53,7 @@ class puppetboard (
   $service_ensure = $::puppetboard::params::service_ensure,
   $service_flags = $::puppetboard::params::service_flags,
   $service_name = $::puppetboard::params::package_name,
+  $package_ensure = $::puppetboard::params::package_ensure,
   $package_name = $::puppetboard::params::package_name,
   $use_puppet_certs = $::puppetboard::params::use_puppet_certs,
 ) inherits puppetboard::params {
