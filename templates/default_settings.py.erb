@@ -47,7 +47,7 @@ GRAPH_FACTS = [
 <% if @inventory_facts -%>
 INVENTORY_FACTS = [
   <%- @inventory_facts.each do |inventory_fact| -%>
-                    ( 'inventory_fact[0]', 'inventory_fact[1]'),
+                    ( '<%= inventory_fact[0] %>', '<%= inventory_fact[1] %>'),
   <%- end -%>
                   ]
 <% end -%>
