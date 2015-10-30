@@ -37,15 +37,17 @@ OFFLINE_MODE = <%= @offline_mode %>
 <% if @enable_catalog -%>
 ENABLE_CATALOG = <%= @enable_catalog %>
 <% end -%>
+<% if @graph_facts -%>
 GRAPH_FACTS = [
-<% @graph_facts.each do |graph_fact| -%>
+  <%- @graph_facts.each do |graph_fact| -%>
                 '<%= graph_fact %>',
+  <%- end -%>
               ]
 <% end -%>
 <% if @inventory_facts -%>
 INVENTORY_FACTS = [
-<% @inventory_facts.each do |inventory_fact| -%>
+  <%- @inventory_facts.each do |inventory_fact| -%>
                     ( 'inventory_fact[0]', 'inventory_fact[1]'),
-<% end -%>
+  <%- end -%>
                   ]
 <% end -%>
