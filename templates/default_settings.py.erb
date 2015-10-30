@@ -17,9 +17,9 @@ DEV_LISTEN_PORT = <%= @dev_listen_port %>
 UNRESPONSIVE_HOURS = <%= @unresponsive_hours %>
 ENABLE_QUERY = <%= @enable_query %>
 LOGLEVEL = '<%= @puppetboard_loglevel %>'
-<% if @secret_key and @secret_key == 'default' -%>
+<% if (@secret_key and @secret_key == 'default') -%>
 SECRET_KEY = os.urandom(24)
-<% else if @secret_key -%>
+<% elsif @secret_key -%>
 SECRET_KEY = <%= @secret_key %>
 <% end -%>
 <% if @dev_coffee_location -%>
@@ -37,7 +37,6 @@ OFFLINE_MODE = <%= @offline_mode %>
 <% if @enable_catalog -%>
 ENABLE_CATALOG = <%= @enable_catalog %>
 <% end -%>
-<%= if @graph_facts -%>
 GRAPH_FACTS = [
 <% @graph_facts.each do |graph_fact| -%>
                 '<%= graph_fact %>',
