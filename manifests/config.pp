@@ -17,6 +17,15 @@ class puppetboard::config (
   $enable_query,
   $puppetboard_loglevel,
   $use_puppet_certs,
+  $import_os,
+  $secret_key,
+  $dev_coffee_location,
+  $localize_timestamp,
+  $reports_count,
+  $offline_mode,
+  $enable_catalog,
+  $graph_facts,
+  $inventory_facts,
 ) {
   file { "${install_path}${config_file}":
     ensure  => 'present',

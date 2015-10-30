@@ -1,3 +1,7 @@
+<% if @import_os -%>
+import os
+<% end -%>
+
 PUPPETDB_HOST = '<%= @puppetdb_host %>'
 PUPPETDB_PORT = <%= @puppetdb_port %>
 <% if @puppetdb_ssl_verify == 'False' -%>
@@ -13,3 +17,36 @@ DEV_LISTEN_PORT = <%= @dev_listen_port %>
 UNRESPONSIVE_HOURS = <%= @unresponsive_hours %>
 ENABLE_QUERY = <%= @enable_query %>
 LOGLEVEL = '<%= @puppetboard_loglevel %>'
+<% if @secret_key and @secret_key == 'default' -%>
+SECRET_KEY = os.urandom(24)
+<% else if @secret_key -%>
+SECRET_KEY = <%= @secret_key %>
+<% end -%>
+<% if @dev_coffee_location -%>
+DEV_COFFEE_LOCATION = '<%= @dev_coffee_location %>'
+<% end -%>
+<% if @localize_timestamp -%>
+LOCALISE_TIMESTAMP = <%= @localize_timestamp %>
+<% end -%>
+<% if @reports_count -%>
+REPORTS_COUNT = <%= @reports_count %>
+<% end -%>
+<% if @offline_mode -%>
+OFFLINE_MODE = <%= @offline_mode %>
+<% end -%>
+<% if @enable_catalog -%>
+ENABLE_CATALOG = <%= @enable_catalog %>
+<% end -%>
+<%= if @graph_facts -%>
+GRAPH_FACTS = [
+<% @graph_facts.each do |graph_fact| -%>
+                '<%= graph_fact %>',
+              ]
+<% end -%>
+<% if @inventory_facts -%>
+INVENTORY_FACTS = [
+<% @inventory_facts.each do |inventory_fact| -%>
+                    ( 'inventory_fact[0]', 'inventory_fact[1]'),
+<% end -%>
+                  ]
+<% end -%>

@@ -2,6 +2,19 @@
 # The parameters that drive the module.
 
 class puppetboard::params {
+  case $::osfamily {
+    'OpenBSD': {
+      case $::kernelversion {
+        '5.7', '5.8': {
+          $config_version = '0.0.4'
+        }
+        default: {
+          $config_version = '0.0.5'
+        }
+      }
+    }
+  }
+
   $install_path = '/var/www/puppetboard/'
   $config_file  = 'puppetboard/default_settings.py'
   $puppetdb_host = 'localhost'
@@ -15,6 +28,34 @@ class puppetboard::params {
   $unresponsive_hours = '2'
   $enable_query = 'True'
   $puppetboard_loglevel = 'info'
+
+  $secret_key = 'default'
+  $import_os  = true
+  $dev_coffee_location = 'coffee'
+  $localize_timestamp = 'True'
+  $reports_count = '10'
+  $offline_mode = 'False'
+  $enable_catalog = 'False'
+  $graph_facts =  [ 'architecture',
+                    'domain',
+                    'lsbcodename',
+                    'lsbdistcodename',
+                    'lsbdistid',
+                    'lsbdistrelease',
+                    'lsbmajdistrelease',
+                    'netmask',
+                    'osfamily',
+                    'puppetversion',
+                    'processorcount',
+                  ]
+  $inventory_facts =  [ [ 'Hostname', 'fqdn', ],
+                        [ 'IP Address', 'ipaddress', ],
+                        [ 'OS', 'lsbdistdescription', ],
+                        [ 'Architecture', 'hardwaremodel', ],
+                        [ 'Kernel Version', 'kernelrelease', ],
+                        [ 'Puppet Version', 'puppetversion', ],
+                      ]
+
   $service_enable = true
   $service_ensure = running
   $service_flags = ''

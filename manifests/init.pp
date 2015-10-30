@@ -38,6 +38,7 @@
 class puppetboard (
   $install_path = $::puppetboard::params::install_path,
   $config_file  = $::puppetboard::params::config_file,
+  $config_version = $::puppetboard::params::config_version,
   $puppetdb_host = $::puppetboard::params::puppetdb_host,
   $puppetdb_port = $::puppetboard::params::puppetdb_port,
   $puppetdb_ssl_verify = $::puppetboard::params::puppetdb_ssl_verify,
@@ -49,6 +50,15 @@ class puppetboard (
   $unresponsive_hours = $::puppetboard::params::unresponsive_hours,
   $enable_query = $::puppetboard::params::enable_query,
   $puppetboard_loglevel = $::puppetboard::params::puppetboard_loglevel,
+  $import_os = $::puppetboard::params::import_os,
+  $secret_key = $::puppetboard::params::secret_key,
+  $dev_coffee_location = $::puppetboard::params::dev_coffee_location,
+  $localize_timestamp = $::puppetboard::params::localize_timestamp,
+  $reports_count = $::puppetboard::params::reports_count,
+  $offline_mode = $::puppetboard::params::offline_mode,
+  $enable_catalog = $::puppetboard::params::enable_catalog,
+  $graph_facts = $::puppetboard::params::graph_facts,
+  $inventory_facts = $::puppetboard::params::inventory_facts,
   $service_enable = $::puppetboard::params::service_enable,
   $service_ensure = $::puppetboard::params::service_ensure,
   $service_flags = $::puppetboard::params::service_flags,
@@ -58,6 +68,27 @@ class puppetboard (
   $use_puppet_certs = $::puppetboard::params::use_puppet_certs,
 ) inherits puppetboard::params {
 
+  if (versioncmp($config_version, '0.0.5') == -1) {
+    $real_import_os = undef
+    $real_secret_key = undef
+    $real_dev_coffee_location = undef
+    $real_localize_timestamp = undef
+    $real_reports_count = undef
+    $real_offline_mode = undef
+    $real_enable_catalog = undef
+    $real_graph_facts = undef
+    $real_inventory_facts = undef
+  } else {
+    $real_import_os = $import_os
+    $real_secret_key = $secret_key
+    $real_dev_coffee_location = $dev_coffee_location
+    $real_localize_timestamp = $localize_timestamp
+    $real_reports_count = $reports_count
+    $real_offline_mode = $offline_mode
+    $real_enable_catalog = $enable_catalog
+    $real_graph_facts = $graph_facts
+    $real_inventory_facts = $inventory_facts
+  }
 
   class { 'puppetboard::install':
     package_ensure => $package_ensure,
@@ -79,6 +110,15 @@ class puppetboard (
     enable_query         => $enable_query,
     puppetboard_loglevel => $puppetboard_loglevel,
     use_puppet_certs     => $use_puppet_certs,
+    import_os            => $real_import_os,
+    secret_key           => $real_secret_key,
+    dev_coffee_location  => $real_dev_coffee_location,
+    localize_timestamp   => $real_localize_timestamp,
+    reports_count        => $real_reports_count,
+    offline_mode         => $real_offline_mode,
+    enable_catalog       => $real_enable_catalog,
+    graph_facts          => $real_graph_facts,
+    inventory_facts      => $inventory_facts,
   }
 
   class { 'puppetboard::service':
