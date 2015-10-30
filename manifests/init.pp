@@ -118,7 +118,7 @@ class puppetboard (
     offline_mode         => $real_offline_mode,
     enable_catalog       => $real_enable_catalog,
     graph_facts          => $real_graph_facts,
-    inventory_facts      => $inventory_facts,
+    inventory_facts      => $real_inventory_facts,
   }
 
   class { 'puppetboard::service':
