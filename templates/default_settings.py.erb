@@ -4,14 +4,17 @@ import os
 
 PUPPETDB_HOST = '<%= @puppetdb_host %>'
 PUPPETDB_PORT = <%= @puppetdb_port %>
-<% if @puppetdb_ssl_verify == 'False' -%>
-PUPPETDB_SSL_VERIFY = False
+<% if @puppetdb_ssl_verify -%>
+PUPPETDB_SSL_VERIFY = '<%= "#{@puppet_ssl_dir}/ca/ca_crt.pem" %>'
 <% else -%>
-PUPPETDB_SSL_VERIFY = '<%= @puppetdb_ssl_verify %>'
+PUPPETDB_SSL_VERIFY = False
 <% end -%>
 PUPPETDB_KEY = '<%= @puppetdb_key %>'
 PUPPETDB_CERT = '<%= @puppetdb_cert %>'
 PUPPETDB_TIMEOUT = <%= @puppetdb_timeout %>
+<% if @default_environment -%>
+DEFAULT_ENVIRONMENT = '<%= @default_environment %>'
+<% end -%>
 DEV_LISTEN_HOST = '<%= @dev_listen_host %>'
 DEV_LISTEN_PORT = <%= @dev_listen_port %>
 UNRESPONSIVE_HOURS = <%= @unresponsive_hours %>
@@ -50,4 +53,8 @@ INVENTORY_FACTS = [
                     ( '<%= inventory_fact[0] %>', '<%= inventory_fact[1] %>'),
   <%- end -%>
                   ]
+<% end -%>
+
+<% if @refresh_rate -%>
+REFRESH_RATE = <%= @refresh_rate %>
 <% end -%>

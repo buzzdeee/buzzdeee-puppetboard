@@ -8,10 +8,24 @@ class puppetboard::params {
         '5.7', '5.8': {
           $config_version = '0.0.4'
         }
-        default: {
+        '5.9': {
           $config_version = '0.0.5'
         }
+        default: {
+          $config_version = '0.1.3'
+        }
       }
+    }
+  }
+  case $::puppetversion {
+    /^3.*/: {
+      $puppet_ssl_dir = '/etc/puppet/ssl'
+    }
+    /^4.*/: {
+      $puppet_ssl_dir = '/etc/puppetlabs/puppet/ssl'
+    }
+    default: {
+      error("${::module_name} only supports Puppet versions 3 or 4")
     }
   }
 
@@ -19,7 +33,7 @@ class puppetboard::params {
   $config_file  = 'puppetboard/default_settings.py'
   $puppetdb_host = 'localhost'
   $puppetdb_port = '8080'
-  $puppetdb_ssl_verify = 'False'
+  $puppetdb_ssl_verify = false
   $puppetdb_key  = 'None'
   $puppetdb_cert = 'None'
   $puppetdb_timeout = '20'
@@ -29,6 +43,9 @@ class puppetboard::params {
   $enable_query = 'True'
   $puppetboard_loglevel = 'info'
 
+
+  # Below are the config items necessary/added
+  # for the 0.0.5
   $secret_key = 'default'
   $import_os  = true
   $dev_coffee_location = 'coffee'
@@ -55,6 +72,11 @@ class puppetboard::params {
                         [ 'Kernel Version', 'kernelrelease', ],
                         [ 'Puppet Version', 'puppetversion', ],
                       ]
+
+  # Below are config items necessary/added
+  # 0.1.x
+  $default_environment = 'production'
+  $refresh_rate = '30'
 
   $service_enable = true
   $service_ensure = running

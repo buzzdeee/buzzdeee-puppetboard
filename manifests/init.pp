@@ -59,6 +59,8 @@ class puppetboard (
   $enable_catalog = $::puppetboard::params::enable_catalog,
   $graph_facts = $::puppetboard::params::graph_facts,
   $inventory_facts = $::puppetboard::params::inventory_facts,
+  $default_environment = $::puppetboard::params::default_inventory,
+  $refresh_rate = $::puppetboard::params::refresh_rate,
   $service_enable = $::puppetboard::params::service_enable,
   $service_ensure = $::puppetboard::params::service_ensure,
   $service_flags = $::puppetboard::params::service_flags,
@@ -66,8 +68,18 @@ class puppetboard (
   $package_ensure = $::puppetboard::params::package_ensure,
   $package_name = $::puppetboard::params::package_name,
   $use_puppet_certs = $::puppetboard::params::use_puppet_certs,
+  $puppet_ssl_dir = $::puppetboard::params::puppet_ssl_dir,
 ) inherits puppetboard::params {
 
+  # undef config parameters for version < 0.1.0
+  if (versioncmp($config_version, '0.1.0') == -1) {
+    $real_default_environment = undef
+    $real_refresh_rate = undef
+  } else {
+    $real_default_environment = $default_environment
+    $real_refresh_rate = $refresh_rate
+  }
+  # undef config parameters for version < 0.0.5
   if (versioncmp($config_version, '0.0.5') == -1) {
     $real_import_os = undef
     $real_secret_key = undef
@@ -110,6 +122,7 @@ class puppetboard (
     enable_query         => $enable_query,
     puppetboard_loglevel => $puppetboard_loglevel,
     use_puppet_certs     => $use_puppet_certs,
+    puppet_ssl_dir       => $puppet_ssl_dir,
     import_os            => $real_import_os,
     secret_key           => $real_secret_key,
     dev_coffee_location  => $real_dev_coffee_location,
@@ -119,6 +132,8 @@ class puppetboard (
     enable_catalog       => $real_enable_catalog,
     graph_facts          => $real_graph_facts,
     inventory_facts      => $real_inventory_facts,
+    refresh_rate         => $real_refresh_rate,
+    default_environment  => $real_default_environment,
   }
 
   class { 'puppetboard::service':

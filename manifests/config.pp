@@ -17,6 +17,7 @@ class puppetboard::config (
   $enable_query,
   $puppetboard_loglevel,
   $use_puppet_certs,
+  $puppet_ssl_dir,
   $import_os,
   $secret_key,
   $dev_coffee_location,
@@ -26,6 +27,8 @@ class puppetboard::config (
   $enable_catalog,
   $graph_facts,
   $inventory_facts,
+  $default_environment,
+  $refresh_rate,
 ) {
   file { "${install_path}${config_file}":
     ensure  => 'present',
@@ -36,21 +39,36 @@ class puppetboard::config (
   }
 
   if $use_puppet_certs {
-    file { '/etc/puppetboard':
+    $config_keydir = dirname($puppetdb_key)
+    $config_certdir = dirname($puppetdb_key)
+    file { $config_keydir:
       ensure => 'directory',
       owner  => 'root',
       group  => '0',
       mode   => '0755',
     }
-    exec { 'copy puppetboard_key':
-      command => "/bin/cp /etc/puppet/ssl/private_keys/${::fqdn}.pem ${puppetdb_key} && chmod 0644 ${puppetdb_key}",
-      creates => $puppetdb_key,
-      require => File['/etc/puppetboard'],
+    if $config_keydir != $config_certdir {
+      file { $config_certdir:
+        ensure => 'directory',
+        owner  => 'root',
+        group  => '0',
+        mode   => '0755',
+      }
     }
-    exec { 'copy puppetboard_cert':
-      command => "/bin/cp /etc/puppet/ssl/certs/${::fqdn}.pem ${puppetdb_cert}",
-      creates => $puppetdb_cert,
-      require => File['/etc/puppetboard'],
+
+    file { $puppetdb_key:
+      owner  => 'root',
+      group  => 'www',
+      mode   => '0640',
+      source => "${puppet_ssl_dir}/private_keys/${::fqdn}.pem",
+      require => File[$config_keydir]
+    }
+    file { $puppetdb_cert:
+      owner  => 'root',
+      group  => 'www',
+      mode   => '0640',
+      source => "${puppet_ssl_dir}/certs/${::fqdn}.pem",
+      require => File[$config_certdir],
     }
   }
 
