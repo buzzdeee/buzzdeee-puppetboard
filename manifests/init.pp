@@ -59,7 +59,7 @@ class puppetboard (
   $enable_catalog = $::puppetboard::params::enable_catalog,
   $graph_facts = $::puppetboard::params::graph_facts,
   $inventory_facts = $::puppetboard::params::inventory_facts,
-  $default_environment = $::puppetboard::params::default_inventory,
+  $default_environment = $::puppetboard::params::default_environment,
   $refresh_rate = $::puppetboard::params::refresh_rate,
   $service_enable = $::puppetboard::params::service_enable,
   $service_ensure = $::puppetboard::params::service_ensure,
