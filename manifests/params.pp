@@ -12,7 +12,7 @@ class puppetboard::params {
           $config_version = '0.0.5'
         }
         default: {
-          $config_version = '0.1.3'
+          $config_version = '0.2.0'
         }
       }
     }
