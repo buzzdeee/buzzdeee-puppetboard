@@ -61,6 +61,7 @@ class puppetboard (
   $inventory_facts = $::puppetboard::params::inventory_facts,
   $default_environment = $::puppetboard::params::default_environment,
   $refresh_rate = $::puppetboard::params::refresh_rate,
+  $overview_filter = $::puppetboard::params::overview_filter,
   $service_enable = $::puppetboard::params::service_enable,
   $service_ensure = $::puppetboard::params::service_ensure,
   $service_flags = $::puppetboard::params::service_flags,
@@ -75,9 +76,11 @@ class puppetboard (
   if (versioncmp($config_version, '0.1.0') == -1) {
     $real_default_environment = undef
     $real_refresh_rate = undef
+    $real_overview_filter = undef
   } else {
     $real_default_environment = $default_environment
     $real_refresh_rate = $refresh_rate
+    $real_overview_filter = $overview_filter
   }
   # undef config parameters for version < 0.0.5
   if (versioncmp($config_version, '0.0.5') == -1) {
@@ -133,6 +136,7 @@ class puppetboard (
     graph_facts          => $real_graph_facts,
     inventory_facts      => $real_inventory_facts,
     refresh_rate         => $real_refresh_rate,
+    overview_filter      => $real_overview_filter,
     default_environment  => $real_default_environment,
   }
 

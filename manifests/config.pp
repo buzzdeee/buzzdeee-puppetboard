@@ -29,6 +29,7 @@ class puppetboard::config (
   $inventory_facts,
   $default_environment,
   $refresh_rate,
+  $overview_filter,
 ) {
   file { "${install_path}${config_file}":
     ensure  => 'present',

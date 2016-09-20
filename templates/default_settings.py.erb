@@ -40,6 +40,9 @@ OFFLINE_MODE = <%= @offline_mode %>
 <% if @enable_catalog -%>
 ENABLE_CATALOG = <%= @enable_catalog %>
 <% end -%>
+<% if @overview_filter -%>
+OVERVIEW_FILTER = <%= @overview_filter %>
+<% end -%>
 <% if @graph_facts -%>
 GRAPH_FACTS = [
   <%- @graph_facts.each do |graph_fact| -%>

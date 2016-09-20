@@ -77,6 +77,7 @@ class puppetboard::params {
   # 0.1.x
   $default_environment = 'production'
   $refresh_rate = '30'
+  $overview_filter = 'None'
 
   $service_enable = true
   $service_ensure = running
