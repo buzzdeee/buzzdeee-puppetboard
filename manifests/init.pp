@@ -62,6 +62,11 @@ class puppetboard (
   $default_environment = $::puppetboard::params::default_environment,
   $refresh_rate = $::puppetboard::params::refresh_rate,
   $overview_filter = $::puppetboard::params::overview_filter,
+  $daily_reports_chart_enabled = $::puppetboard::params::daily_reports_chart_enabled,
+  $daily_reports_chart_days = $::puppetboard::params::daily_reports_chart_days,
+  $normal_table_count = $::puppetboard::params::normal_table_count,
+  $little_table_count = $::puppetboard::params::little_table_count,
+  $table_count_selector = $::puppetboard::params::table_count_selector,
   $service_enable = $::puppetboard::params::service_enable,
   $service_ensure = $::puppetboard::params::service_ensure,
   $service_flags = $::puppetboard::params::service_flags,
@@ -104,40 +109,58 @@ class puppetboard (
     $real_graph_facts = $graph_facts
     $real_inventory_facts = $inventory_facts
   }
+  if (versioncmp($config_version, '0.2.1') == -1) {
+    $real_daily_reports_chart_enabled = undef
+    $real_daily_reports_chart_days = undef
+    $real_normal_table_count = undef
+    $real_little_table_count = undef
+    $real_table_count_selector = undef
+  } else {
+    $real_daily_reports_chart_enabled = $daily_reports_chart_enabled
+    $real_daily_reports_chart_days = $daily_reports_chart_days
+    $real_normal_table_count = $normal_table_count
+    $real_little_table_count = $little_table_count
+    $real_table_count_selector = $table_count_selector
 
+  }
   class { 'puppetboard::install':
     package_ensure => $package_ensure,
     package_name   => $package_name,
   }
 
   class { 'puppetboard::config':
-    install_path         => $install_path,
-    config_file          => $config_file,
-    puppetdb_host        => $puppetdb_host,
-    puppetdb_port        => $puppetdb_port,
-    puppetdb_ssl_verify  => $puppetdb_ssl_verify,
-    puppetdb_key         => $puppetdb_key,
-    puppetdb_cert        => $puppetdb_cert,
-    puppetdb_timeout     => $puppetdb_timeout,
-    dev_listen_host      => $dev_listen_host,
-    dev_listen_port      => $dev_listen_port,
-    unresponsive_hours   => $unresponsive_hours,
-    enable_query         => $enable_query,
-    puppetboard_loglevel => $puppetboard_loglevel,
-    use_puppet_certs     => $use_puppet_certs,
-    puppet_ssl_dir       => $puppet_ssl_dir,
-    import_os            => $real_import_os,
-    secret_key           => $real_secret_key,
-    dev_coffee_location  => $real_dev_coffee_location,
-    localize_timestamp   => $real_localize_timestamp,
-    reports_count        => $real_reports_count,
-    offline_mode         => $real_offline_mode,
-    enable_catalog       => $real_enable_catalog,
-    graph_facts          => $real_graph_facts,
-    inventory_facts      => $real_inventory_facts,
-    refresh_rate         => $real_refresh_rate,
-    overview_filter      => $real_overview_filter,
-    default_environment  => $real_default_environment,
+    install_path                => $install_path,
+    config_file                 => $config_file,
+    puppetdb_host               => $puppetdb_host,
+    puppetdb_port               => $puppetdb_port,
+    puppetdb_ssl_verify         => $puppetdb_ssl_verify,
+    puppetdb_key                => $puppetdb_key,
+    puppetdb_cert               => $puppetdb_cert,
+    puppetdb_timeout            => $puppetdb_timeout,
+    dev_listen_host             => $dev_listen_host,
+    dev_listen_port             => $dev_listen_port,
+    unresponsive_hours          => $unresponsive_hours,
+    enable_query                => $enable_query,
+    puppetboard_loglevel        => $puppetboard_loglevel,
+    use_puppet_certs            => $use_puppet_certs,
+    puppet_ssl_dir              => $puppet_ssl_dir,
+    import_os                   => $real_import_os,
+    secret_key                  => $real_secret_key,
+    dev_coffee_location         => $real_dev_coffee_location,
+    localize_timestamp          => $real_localize_timestamp,
+    reports_count               => $real_reports_count,
+    offline_mode                => $real_offline_mode,
+    enable_catalog              => $real_enable_catalog,
+    graph_facts                 => $real_graph_facts,
+    inventory_facts             => $real_inventory_facts,
+    refresh_rate                => $real_refresh_rate,
+    overview_filter             => $real_overview_filter,
+    default_environment         => $real_default_environment,
+    daily_reports_chart_enabled => $real_daily_reports_chart_enabled,
+    daily_reports_chart_days    => $real_daily_reports_chart_days,
+    normal_table_count          => $real_normal_table_count,
+    little_table_count          => $real_little_table_count,
+    table_count_selector        => $real_table_count_selector,
   }
 
   class { 'puppetboard::service':

@@ -11,8 +11,11 @@ class puppetboard::params {
         '5.9': {
           $config_version = '0.0.5'
         }
-        default: {
+        '6.0': {
           $config_version = '0.2.0'
+        }
+        default: {
+          $config_version = '0.2.1'
         }
       }
     }
@@ -78,6 +81,14 @@ class puppetboard::params {
   $default_environment = 'production'
   $refresh_rate = '30'
   $overview_filter = 'None'
+
+
+  # Below are config items added for 0.2.1
+  $daily_reports_chart_enabled = 'True'
+  $daily_reports_chart_days = '8'
+  $normal_table_count = '100'
+  $little_table_count = '10'
+  $table_count_selector = '[10, 20, 50, 100, 500]'
 
   $service_enable = true
   $service_ensure = running

@@ -61,3 +61,18 @@ INVENTORY_FACTS = [
 <% if @refresh_rate -%>
 REFRESH_RATE = <%= @refresh_rate %>
 <% end -%>
+
+<% if @daily_reports_chart_enabled -%>
+DAILY_REPORTS_CHART_ENABLED = <%= @daily_reports_chart_enabled %>
+DAILY_REPORTS_CHART_DAYS = <%= @daily_reports_chart_days %>
+<% end -%>
+
+<% if @normal_table_count -%>
+NORMAL_TABLE_COUNT = <%= @normal_table_count %>
+<% end -%>
+<% if @little_table_count -%>
+LITTLE_TABLE_COUNT =  <%= @little_table_count %>
+<% end -%>
+<% if @table_count_selector -%>
+TABLE_COUNT_SELECTOR = <%= @table_count_selector %>
+<% end -%>

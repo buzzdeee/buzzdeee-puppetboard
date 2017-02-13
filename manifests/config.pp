@@ -30,6 +30,11 @@ class puppetboard::config (
   $default_environment,
   $refresh_rate,
   $overview_filter,
+  $daily_reports_chart_enabled,
+  $daily_reports_chart_days,
+  $normal_table_count,
+  $little_table_count,
+  $table_count_selector,
 ) {
   file { "${install_path}${config_file}":
     ensure  => 'present',
