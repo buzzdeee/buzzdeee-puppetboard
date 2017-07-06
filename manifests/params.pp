@@ -24,11 +24,8 @@ class puppetboard::params {
     /^3.*/: {
       $puppet_ssl_dir = '/etc/puppet/ssl'
     }
-    /^4.*/: {
-      $puppet_ssl_dir = '/etc/puppetlabs/puppet/ssl'
-    }
     default: {
-      error("${::module_name} only supports Puppet versions 3 or 4")
+      $puppet_ssl_dir = '/etc/puppetlabs/puppet/ssl'
     }
   }
 
