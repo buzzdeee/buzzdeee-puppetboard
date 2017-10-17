@@ -177,7 +177,7 @@ class puppetboard (
     service_name   => $service_name,
   }
 
-  Class['puppetboard::install'] ->
-  Class['puppetboard::config'] ~>
-  Class['puppetboard::service']
+  Class['puppetboard::install']
+  -> Class['puppetboard::config']
+  ~> Class['puppetboard::service']
 }

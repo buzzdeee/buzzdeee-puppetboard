@@ -17,10 +17,13 @@ class puppetboard::params {
         '6.1': {
           $config_version = '0.2.1'
         }
-        'default': {
+        default: {
           $config_version = '0.3.0'
         }
       }
+    }
+    default: {
+      $config_version = '0.3.0'
     }
   }
   case $::puppetversion {
