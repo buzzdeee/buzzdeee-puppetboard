@@ -64,17 +64,17 @@ class puppetboard::config (
     }
 
     file { $puppetdb_key:
-      owner  => 'root',
-      group  => 'www',
-      mode   => '0640',
-      source => "${puppet_ssl_dir}/private_keys/${::fqdn}.pem",
+      owner   => 'root',
+      group   => 'www',
+      mode    => '0640',
+      source  => "${puppet_ssl_dir}/private_keys/${::fqdn}.pem",
       require => File[$config_keydir]
     }
     file { $puppetdb_cert:
-      owner  => 'root',
-      group  => 'www',
-      mode   => '0640',
-      source => "${puppet_ssl_dir}/certs/${::fqdn}.pem",
+      owner   => 'root',
+      group   => 'www',
+      mode    => '0640',
+      source  => "${puppet_ssl_dir}/certs/${::fqdn}.pem",
       require => File[$config_certdir],
     }
   }
