@@ -76,3 +76,11 @@ LITTLE_TABLE_COUNT =  <%= @little_table_count %>
 <% if @table_count_selector -%>
 TABLE_COUNT_SELECTOR = <%= @table_count_selector %>
 <% end -%>
+<% if @displayed_metrics -%>
+DISPLAYED_METRICS = [
+  <%- @displayed_metrics.each do |displayed_metric| -%>
+                '<%= displayed_metric %>',
+  <%- end -%>
+
+                  ]
+<% end -%>

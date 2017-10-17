@@ -14,8 +14,11 @@ class puppetboard::params {
         '6.0': {
           $config_version = '0.2.0'
         }
-        default: {
+        '6.1': {
           $config_version = '0.2.1'
+        }
+        'default': {
+          $config_version = '0.3.0'
         }
       }
     }
@@ -79,13 +82,20 @@ class puppetboard::params {
   $refresh_rate = '30'
   $overview_filter = 'None'
 
-
   # Below are config items added for 0.2.1
   $daily_reports_chart_enabled = 'True'
   $daily_reports_chart_days = '8'
   $normal_table_count = '100'
   $little_table_count = '10'
   $table_count_selector = '[10, 20, 50, 100, 500]'
+
+  # Below are config items added for 0.3.0
+  $displayed_metrics =  [ 'resources.total',
+                          'events.failure',
+                          'events.success',
+                          'resources.skipped',
+                          'events.noop',
+                        ]
 
   $service_enable = true
   $service_ensure = running

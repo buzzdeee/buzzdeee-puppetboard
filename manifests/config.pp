@@ -26,6 +26,7 @@ class puppetboard::config (
   $offline_mode,
   $enable_catalog,
   $graph_facts,
+  $displayed_metrics,
   $inventory_facts,
   $default_environment,
   $refresh_rate,

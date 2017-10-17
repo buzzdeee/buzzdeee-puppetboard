@@ -58,6 +58,7 @@ class puppetboard (
   $offline_mode = $::puppetboard::params::offline_mode,
   $enable_catalog = $::puppetboard::params::enable_catalog,
   $graph_facts = $::puppetboard::params::graph_facts,
+  $displayed_metrics = $::puppetboard::params::displayed_metrics,
   $inventory_facts = $::puppetboard::params::inventory_facts,
   $default_environment = $::puppetboard::params::default_environment,
   $refresh_rate = $::puppetboard::params::refresh_rate,
@@ -121,8 +122,13 @@ class puppetboard (
     $real_normal_table_count = $normal_table_count
     $real_little_table_count = $little_table_count
     $real_table_count_selector = $table_count_selector
-
   }
+  if (versioncmp($config_version, '0.3.0') == -1) {
+    $real_displayed_metrics = undef
+  } else {
+    $real_displayed_metrics = $displayed_metrics
+  }
+
   class { 'puppetboard::install':
     package_ensure => $package_ensure,
     package_name   => $package_name,
@@ -152,6 +158,7 @@ class puppetboard (
     offline_mode                => $real_offline_mode,
     enable_catalog              => $real_enable_catalog,
     graph_facts                 => $real_graph_facts,
+    displayed_metrics           => $real_displayed_metrics,
     inventory_facts             => $real_inventory_facts,
     refresh_rate                => $real_refresh_rate,
     overview_filter             => $real_overview_filter,
