@@ -17,13 +17,16 @@ class puppetboard::params {
         '6.1': {
           $config_version = '0.2.1'
         }
-        default: {
+        '6.2': {
           $config_version = '0.3.0'
+        }
+        default: {
+          $config_version = '1.0.0'
         }
       }
     }
     default: {
-      $config_version = '0.3.0'
+      $config_version = '1.0.0'
     }
   }
   case $::puppetversion {
@@ -99,6 +102,8 @@ class puppetboard::params {
                           'resources.skipped',
                           'events.noop',
                         ]
+
+  $puppetdb_proto = 'https'
 
   $service_enable = true
   $service_ensure = running

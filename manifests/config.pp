@@ -7,6 +7,7 @@ class puppetboard::config (
   $config_file,
   $puppetdb_host,
   $puppetdb_port,
+  $puppetdb_proto,
   $puppetdb_ssl_verify,
   $puppetdb_key,
   $puppetdb_cert,
