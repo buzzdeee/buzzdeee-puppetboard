@@ -104,6 +104,7 @@ class puppetboard::params {
                         ]
 
   $puppetdb_proto = 'https'
+  $puppetdb_with_event_numbers = 'True'
 
   $service_enable = true
   $service_ensure = running

@@ -12,6 +12,7 @@ class puppetboard::config (
   $puppetdb_key,
   $puppetdb_cert,
   $puppetdb_timeout,
+  $puppetdb_with_event_numbers,
   $dev_listen_host,
   $dev_listen_port,
   $unresponsive_hours,

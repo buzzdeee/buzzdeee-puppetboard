@@ -86,4 +86,7 @@ DISPLAYED_METRICS = [
 <% if @puppetdb_proto -%>
 PUPPETDB_PROTO = '<%= @puppetdb_proto %>'
 <% end -%>
+<% if @puppetdb_with_event_numbers -%>
+WITH_EVENT_NUMBERS = <%= @puppetdb_with_event_numbers %>
+<% end -%>
 <% end -%>

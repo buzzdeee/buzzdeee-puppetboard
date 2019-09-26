@@ -42,6 +42,7 @@ class puppetboard (
   $puppetdb_host = $::puppetboard::params::puppetdb_host,
   $puppetdb_port = $::puppetboard::params::puppetdb_port,
   $puppetdb_proto = $::puppetboard::params::puppetdb_proto,
+  $puppetdb_with_event_numbers = $::puppetboard::params::puppetdb_with_event_numbers,
   $puppetdb_ssl_verify = $::puppetboard::params::puppetdb_ssl_verify,
   $puppetdb_key  = $::puppetboard::params::puppetdb_key,
   $puppetdb_cert = $::puppetboard::params::puppetdb_cert,
@@ -134,6 +135,11 @@ class puppetboard (
   } else {
     $real_puppetdb_proto = $puppetdb_proto
   }
+  if (versioncmp($config_version, '1.1.0') == -1) {
+    $real_puppetdb_proto = undef
+  } else {
+    $real_puppetdb_with_event_numbers = $puppetdb_with_event_numbers
+  }
 
   class { 'puppetboard::install':
     package_ensure => $package_ensure,
@@ -175,6 +181,7 @@ class puppetboard (
     little_table_count          => $real_little_table_count,
     table_count_selector        => $real_table_count_selector,
     puppetdb_proto              => $real_puppetdb_proto,
+    puppetdb_with_event_numbers => $real_puppetdb_with_event_numbers,
   }
 
   class { 'puppetboard::service':
