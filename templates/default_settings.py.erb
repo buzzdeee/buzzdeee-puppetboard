@@ -89,4 +89,10 @@ PUPPETDB_PROTO = '<%= @puppetdb_proto %>'
 <% if @puppetdb_with_event_numbers -%>
 WITH_EVENT_NUMBERS = <%= @puppetdb_with_event_numbers %>
 <% end -%>
+<% if @show_error_as -%>
+SHOW_ERROR_AS = '<%= @show_error_as %>'
+<% end -%>
+<% if @code_prefix_to_remove -%>
+CODE_PREFIX_TO_REMOVE = '<%= @code_prefix_to_remove%>'
+<% end -%>
 <% end -%>

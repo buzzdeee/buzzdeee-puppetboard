@@ -33,6 +33,8 @@ class puppetboard::config (
   $default_environment,
   $refresh_rate,
   $overview_filter,
+  $show_error_as,
+  $code_prefix_to_remove,
   $daily_reports_chart_enabled,
   $daily_reports_chart_days,
   $normal_table_count,

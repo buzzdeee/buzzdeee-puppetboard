@@ -65,6 +65,8 @@ class puppetboard (
   $default_environment = $::puppetboard::params::default_environment,
   $refresh_rate = $::puppetboard::params::refresh_rate,
   $overview_filter = $::puppetboard::params::overview_filter,
+  $show_error_as = $::puppetboard::params::show_error_as,
+  $code_prefix_to_remove = $::puppetboard::params::code_prefix_to_remove,
   $daily_reports_chart_enabled = $::puppetboard::params::daily_reports_chart_enabled,
   $daily_reports_chart_days = $::puppetboard::params::daily_reports_chart_days,
   $normal_table_count = $::puppetboard::params::normal_table_count,
@@ -140,6 +142,13 @@ class puppetboard (
   } else {
     $real_puppetdb_with_event_numbers = $puppetdb_with_event_numbers
   }
+  if (versioncmp($config_version, '3.4.0') == -1) {
+    $real_show_error_as = undef
+    $real_code_prefix_to_remove = undef
+  } else {
+    $real_show_error_as = $show_error_as
+    $real_code_prefix_to_remove = $code_prefix_to_remove
+  }
 
   class { 'puppetboard::install':
     package_ensure => $package_ensure,
@@ -180,6 +189,8 @@ class puppetboard (
     normal_table_count          => $real_normal_table_count,
     little_table_count          => $real_little_table_count,
     table_count_selector        => $real_table_count_selector,
+    show_error_as               => $real_show_error_as,
+    code_prefix_to_remove       => $real_code_prefix_to_remove,
     puppetdb_proto              => $real_puppetdb_proto,
     puppetdb_with_event_numbers => $real_puppetdb_with_event_numbers,
   }

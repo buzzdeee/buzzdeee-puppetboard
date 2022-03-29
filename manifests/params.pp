@@ -21,12 +21,12 @@ class puppetboard::params {
           $config_version = '0.3.0'
         }
         default: {
-          $config_version = '1.0.0'
+          $config_version = '3.4.0'
         }
       }
     }
     default: {
-      $config_version = '1.0.0'
+      $config_version = '3.4.1'
     }
   }
   case $::puppetversion {
@@ -105,6 +105,10 @@ class puppetboard::params {
 
   $puppetdb_proto = 'https'
   $puppetdb_with_event_numbers = 'True'
+
+  # added with 3.4.0
+  $show_error_as = 'friendly'	# or 'raw'
+  $code_prefix_to_remove = '/etc/puppetlabs/code/environments'
 
   $service_enable = true
   $service_ensure = running
