@@ -21,7 +21,7 @@ UNRESPONSIVE_HOURS = <%= @unresponsive_hours %>
 ENABLE_QUERY = <%= @enable_query %>
 LOGLEVEL = '<%= @puppetboard_loglevel %>'
 <% if (@secret_key and @secret_key == 'default') -%>
-SECRET_KEY = os.urandom(24)
+SECRET_KEY = str(os.urandom(24))
 <% elsif @secret_key -%>
 SECRET_KEY = <%= @secret_key %>
 <% end -%>
@@ -96,3 +96,6 @@ SHOW_ERROR_AS = '<%= @show_error_as %>'
 CODE_PREFIX_TO_REMOVE = '<%= @code_prefix_to_remove%>'
 <% end -%>
 <% end -%>
+FAVORITE_ENVS = [
+    'production',
+]
