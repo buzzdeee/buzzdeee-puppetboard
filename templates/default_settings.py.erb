@@ -5,7 +5,7 @@ import os
 PUPPETDB_HOST = '<%= @puppetdb_host %>'
 PUPPETDB_PORT = <%= @puppetdb_port %>
 <% if @puppetdb_ssl_verify -%>
-PUPPETDB_SSL_VERIFY = '<%= "#{@puppet_ssl_dir}/ca/ca_crt.pem" %>'
+PUPPETDB_SSL_VERIFY = '<%= @puppetdb_ca %>'
 <% else -%>
 PUPPETDB_SSL_VERIFY = False
 <% end -%>

@@ -45,6 +45,7 @@ class puppetboard::params {
   $puppetdb_ssl_verify = false
   $puppetdb_key  = 'None'
   $puppetdb_cert = 'None'
+  $puppetdb_ca = 'None'
   $puppetdb_timeout = '20'
   $dev_listen_host = '127.0.0.1'
   $dev_listen_port = '5000'

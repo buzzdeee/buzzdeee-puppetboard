@@ -11,6 +11,7 @@ class puppetboard::config (
   $puppetdb_ssl_verify,
   $puppetdb_key,
   $puppetdb_cert,
+  $puppetdb_ca,
   $puppetdb_timeout,
   $puppetdb_with_event_numbers,
   $dev_listen_host,
@@ -79,6 +80,13 @@ class puppetboard::config (
       group   => 'www',
       mode    => '0640',
       source  => "${puppet_ssl_dir}/certs/${::fqdn}.pem",
+      require => File[$config_certdir],
+    }
+    file { $puppetdb_ca:
+      owner   => 'root',
+      group   => 'www',
+      mode    => '0640',
+      source  => "${puppet_ssl_dir}/ca/ca_crt.pem",
       require => File[$config_certdir],
     }
   }
