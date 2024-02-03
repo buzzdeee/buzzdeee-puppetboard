@@ -2,7 +2,7 @@
 # The parameters that drive the module.
 
 class puppetboard::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     'OpenBSD': {
       case $::kernelversion {
         '5.7', '5.8': {
