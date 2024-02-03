@@ -72,14 +72,14 @@ class puppetboard::config (
       owner   => 'root',
       group   => 'www',
       mode    => '0640',
-      source  => "${puppet_ssl_dir}/private_keys/${::fqdn}.pem",
+      source  => "${puppet_ssl_dir}/private_keys/${facts['networking']['fqdn']}.pem",
       require => File[$config_keydir]
     }
     file { $puppetdb_cert:
       owner   => 'root',
       group   => 'www',
       mode    => '0640',
-      source  => "${puppet_ssl_dir}/certs/${::fqdn}.pem",
+      source  => "${puppet_ssl_dir}/certs/${facts['networking']['fqdn']}.pem",
       require => File[$config_certdir],
     }
     file { $puppetdb_ca:
