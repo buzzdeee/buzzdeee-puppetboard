@@ -58,6 +58,15 @@ INVENTORY_FACTS = [
                   ]
 <% end -%>
 
+INVENTORY_FACT_TEMPLATES = {
+    'trusted': (
+        """<a href="{{url_for('node', env=current_env, node_name=value.certname)}}">"""
+        """{{value.hostname}}"""
+        """</a>"""
+    ),
+    'os': "{{ fact_os_detection(value) }}",
+}
+
 <% if @refresh_rate -%>
 REFRESH_RATE = <%= @refresh_rate %>
 <% end -%>
